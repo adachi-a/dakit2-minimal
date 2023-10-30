@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dakit_site_title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/photoviewer@3.8.1/dist/photoviewer.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="navbar bg-{{ dakit_bs_theme_bg | default('primary') }} navbar-expand-md" data-bs-theme="dark">
+        <nav class="container-md flex-wrap flex-md-nowrap" aria-label="Main navigation">
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a class=" navbar-brand py-1 me-4" href="#"><span>{{ dakit_site_title }}</span></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto"></ul>
+                {# <ul class="navbar-nav mb-2 mb-md-0">
+                    <li class="nav-item pe-2">
+                        <a class="nav-link" aria-current="page" href="https://github.com/itemsapi/itemsjs">ItemsJS</a>
+                    </li>
+                    <li class="nav-item pe-2">
+                        <a class="nav-link" aria-current="page" href="https://www.fusejs.io/">Fuse.js</a>
+                    </li>
+                    <li class="nav-item pe-2">
+                        <a class="nav-link" aria-current="page" href="https://svelte.dev/">Svelte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte-demo"><i
+                                class="bi bi-github"></i></a>
+                    </li>
+                </ul> #}
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="d-flex my-4">
+            <h1>{{ item_title }}</h1>
+            <div class="ms-auto">
+                <a class="btn btn-{{ dakit_bs_theme_bg | default('primary') }}" href="{{ item_metadata_filename }}"
+                    target="_blank"><i class="bi bi-download"></i>
+                    メタデータ<small>(JPCOAR)</small></a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-4">
+                <img id="openViewer" class="img-fluid img-thumbnail" src="{{ item_image_list[0]['src'] }}"
+                    alt="{{ item_image_list[0]['title'] }}">
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <tbody>
+                        {% for key, value in item_metadata.items() %}
+                        <tr>
+                            <th scope="row">{{ key }}</th>
+                            <td>{{ value }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/photoviewer@3.8.1/dist/photoviewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        const images = {{ item_image_list | tojson }};
+
+        const options = {
+            index: 0,
+            fixedModalPos: true
+        };
+
+        document.getElementById('openViewer').addEventListener('click', function () {
+            var viewer = new PhotoViewer(images, options);
+        });
+    </script>
+</body>
+
+</html>

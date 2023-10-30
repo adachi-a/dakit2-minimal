@@ -1,0 +1,39 @@
+<script>
+  import Search from './Search.svelte';
+  import './app.scss';
+  import * as bootstrap from 'bootstrap';
+</script>
+
+<svelte:head>
+  {% if dakit_noindex %}
+  <meta name="robots" content="noindex, nofollow" />
+  {% endif %}
+</svelte:head>
+
+<header class="navbar bg-{{ dakit_bs_theme_bg | default('primary') }} navbar-expand-md" data-bs-theme="dark">
+  <nav class="container-md flex-wrap flex-md-nowrap" aria-label="Main navigation">
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a class="navbar-brand py-1 me-4" href="#"><span>{{ dakit_site_title }}</span></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto"></ul>
+      {# <ul class="navbar-nav mb-2 mb-md-0">
+        <li class="nav-item pe-2">
+          <a class="nav-link" aria-current="page" href="https://github.com/itemsapi/itemsjs">ItemsJS</a>
+        </li>
+        <li class="nav-item pe-2">
+          <a class="nav-link" aria-current="page" href="https://www.fusejs.io/">Fuse.js</a>
+        </li>
+        <li class="nav-item pe-2">
+          <a class="nav-link" aria-current="page" href="https://svelte.dev/">Svelte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte-demo"><i class="bi bi-github"></i></a>
+        </li>
+      </ul> #}
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+  <Search />
+</div>
