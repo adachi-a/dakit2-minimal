@@ -118,7 +118,7 @@
     return filters[title] && filters[title].includes(key);
   }
 
-  let sortOptions = Object.keys(configuration.sortings).map((key) => ({ value: key, label: configuration.sortings[key].field + ' ' + configuration.sortings[key].order }));
+  let sortOptions = Object.keys(configuration.sortings).map((key) => ({ value: key, label: key }));
   let selectedSort = sortOptions.length > 0 ? sortOptions[0].value : null;
 
   function updateSort(event) {
