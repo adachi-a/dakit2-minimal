@@ -58,10 +58,12 @@
                 <table class="table">
                     <tbody>
                         {% for key, value in item_metadata.items() %}
+                        {% if key != 'search_id' %}
                         <tr>
                             <th scope="row">{{ key }}</th>
                             <td>{{ value }}</td>
                         </tr>
+                        {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
