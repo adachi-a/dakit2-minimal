@@ -53,7 +53,7 @@
       filters: filters,
     };
     if (search.length > 0) {
-      searchParams.ids = fuse.search(search).map((item) => item.item.id);
+      searchParams.ids = fuse.search(search).map((item) => item.item.search_id);
     }
     const searchResults = items.search(searchParams);
     processSearchResults(searchResults);
